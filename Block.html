@@ -1,0 +1,157 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title></title>
+    <link href="Css/Initialization.css" rel="stylesheet" />
+    <style>
+        div {
+            border: 0px solid red;
+        }
+
+        .out {
+            border: 0px solid red;
+            margin: 0 auto;
+            height: 702px;
+            width: 702px;
+        }
+
+        .ulcol ul li {
+            text-align: center;
+            border: 0px solid #4cff00;
+            float: left;
+            height: 60px;
+            line-height: 60px;
+            width: 60px;
+        }
+
+        .ulcol ul {
+            height: 60px;
+            border: 0px solid #000000;
+            width: 600px;
+        }
+
+        .ulrow ul {
+            width: 60px;
+            height: 540px;
+        }
+
+            .ulrow ul li {
+                text-align: center;
+                border: 0px solid #4cff00;
+                height: 60px;
+                line-height: 60px;
+                width: 60px;
+            }
+
+
+        .tablediv > ol > li {
+            width: 60px;
+            height: 60px;
+            float: left;
+            text-align: center;
+            line-height: 60px;
+            border-bottom: 1px solid #808080;
+            border-right: 1px solid #808080;
+            margin-bottom: -1px;
+            margin-right: -1px;
+        }
+
+        .brispan {
+            top: 0;
+            left: 0;
+            width: 60px;
+            height: 50px;
+            background-color: blue;
+            border-top: 10px solid red;
+            position: absolute;
+            transition: 0.5s all;
+        }
+    </style>
+    <script>
+        var col = 9,row = 9,width = 60,height = 60;
+        function Init() {
+            AddBlock();
+            AddBri();
+        }
+
+
+        var redg = 0;
+        function AddBlock() {
+            var tbobj = document.getElementById("tablediv");
+            var tbnode = tbobj.children[0];
+            //console.log(tbnode);
+            var divhtml = "";
+            for (var i = 0; i < col * row; i++) {
+                var obj = document.createElement('li');
+                obj.innerText = "";
+                //(1 + i);
+                tbnode.appendChild(obj);
+                //divhtml += "<li>" + j + "</li>";
+            }
+        }
+        function AddBri() {
+            var _bri = document.createElement('span');
+            _bri.className = "brispan";
+            _bri.id = "_bri";
+            _bri.style.left = Rpos(col) * width + "px";
+            _bri.style.top = Rpos(row) * height + "px";
+
+            document.getElementById("tablediv").appendChild(_bri);
+
+            //Rpos();
+        }
+        function Rpos(pos) {
+            return Math.round(Math.random() * (pos - 1));
+        }
+        function TrunLeft(Id) {
+            --redg;
+            var iditem = document.getElementById("_bri");
+            iditem.style.transform = "rotate(" + (90 * redg) + "deg)";
+        }
+        function TrunRight() {
+            ++redg;
+            var iditem = document.getElementById("_bri");
+            iditem.style.transform = "rotate(" + (90 * redg) + "deg)";
+        }
+    </script>
+</head>
+<body onload="Init();">
+    <div class="out">
+        <div style="height: 60px; width: 600px;" class="ulcol">
+            <ul>
+                <li></li>
+                <li>1</li>
+                <li>2</li>
+                <li>3</li>
+                <li>4</li>
+                <li>5</li>
+                <li>6</li>
+                <li>7</li>
+                <li>8</li>
+                <li>9</li>
+            </ul>
+        </div>
+
+        <div style="width: 60px; height: 540px; float: left;" class="ulrow">
+            <ul>
+                <li>1</li>
+                <li>2</li>
+                <li>3</li>
+                <li>4</li>
+                <li>5</li>
+                <li>6</li>
+                <li>7</li>
+                <li>8</li>
+                <li>9</li>
+            </ul>
+        </div>
+        <div style="border: 1px solid blue; float: left; height: 542px; width: 542px; position: relative;" class="tablediv" id="tablediv">
+            <ol>
+            </ol>
+        </div>
+        <input type="button" value="左转" onclick="TrunLeft()" />
+        <input type="button" value=右转" onclick="TrunRight()" />
+    </div>
+</body>
+</html>
